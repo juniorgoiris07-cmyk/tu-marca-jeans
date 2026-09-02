@@ -1,0 +1,100 @@
+{
+  "productos": [
+    {
+      "id": "recto-clasico",
+      "nombre": "Recto Clásico",
+      "categoria": "hombre",
+      "color": "Índigo oscuro",
+      "talles": "38 – 46",
+      "precio": 259000,
+      "enOferta": false,
+      "precioOferta": null,
+      "stock": true,
+      "imagen": "images/product-recto-clasico.jpg"
+    },
+    {
+      "id": "skinny-alto",
+      "nombre": "Skinny Tiro Alto",
+      "categoria": "mujer",
+      "color": "Negro",
+      "talles": "36 – 44",
+      "precio": 279000,
+      "enOferta": false,
+      "precioOferta": null,
+      "stock": false,
+      "imagen": "images/product-skinny-alto.jpg"
+    },
+    {
+      "id": "mom-fit",
+      "nombre": "Mom Fit",
+      "categoria": "mujer",
+      "color": "Azul crudo",
+      "talles": "36 – 44",
+      "precio": 265000,
+      "enOferta": false,
+      "precioOferta": null,
+      "stock": true,
+      "imagen": "images/product-mom-fit.jpg"
+    },
+    {
+      "id": "wide-leg",
+      "nombre": "Wide Leg",
+      "categoria": "mujer",
+      "color": "Gris piedra",
+      "talles": "36 – 44",
+      "precio": 289000,
+      "enOferta": true,
+      "precioOferta": 259000,
+      "stock": true,
+      "imagen": "images/product-wide-leg.jpg"
+    },
+    {
+      "id": "slim-straight",
+      "nombre": "Slim Straight",
+      "categoria": "hombre",
+      "color": "Stone wash",
+      "talles": "38 – 46",
+      "precio": 269000,
+      "enOferta": false,
+      "precioOferta": null,
+      "stock": true,
+      "imagen": "images/product-slim-straight.jpg"
+    },
+    {
+      "id": "cargo-denim",
+      "nombre": "Cargo Denim",
+      "categoria": "unisex",
+      "color": "Índigo",
+      "talles": "36 – 46",
+      "precio": 299000,
+      "enOferta": false,
+      "precioOferta": null,
+      "stock": true,
+      "imagen": "images/product-cargo-denim.jpg"
+    },
+    {
+      "id": "flare-retro",
+      "nombre": "Flare Retro",
+      "categoria": "mujer",
+      "color": "Azul medio",
+      "talles": "36 – 42",
+      "precio": 285000,
+      "enOferta": true,
+      "precioOferta": 249000,
+      "stock": true,
+      "imagen": "images/product-flare-retro.jpg"
+    },
+    {
+      "id": "straight-crudo",
+      "nombre": "Straight Crudo",
+      "categoria": "hombre",
+      "color": "Crudo",
+      "talles": "38 – 46",
+      "precio": 259000,
+      "enOferta": false,
+      "precioOferta": null,
+      "stock": true,
+      "imagen": "images/product-straight-crudo.jpg"
+    }
+  ]
+}
