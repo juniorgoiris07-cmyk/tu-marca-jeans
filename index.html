@@ -374,7 +374,7 @@
           a paso — es un panel con usuario y contraseña, con formularios, sin tocar código.
   5) FOTOS DE PRODUCTO: están en la carpeta "images/" (por ahora son texturas de tela genéricas,
      de relleno, no fotos reales). El nombre de archivo de cada foto se define en
-     content/productos.json (campo "imagen"), o se sube directo desde el panel de administración.
+     content/productos.json (campo "image"), o se sube directo desde el panel de administración.
      Usá fotos en formato vertical (relación 3:4, por ejemplo 900x1200px) para que se vean bien
      recortadas.
   6) REDES E INSTAGRAM: buscá "instagram.com/tu_usuario" y "facebook.com/tu_pagina" en el footer.
@@ -643,14 +643,14 @@
   var WHATSAPP_NUMERO = "595981234567";
 
   var PRODUCTOS_RESPALDO = [
-    { id:"recto-clasico",  nombre:"Recto Clásico",     categoria:"hombre", color:"Índigo oscuro", talles:"38 – 46", precio:259000, enOferta:false, precioOferta:null,   stock:true,  imagen:"images/product-recto-clasico.jpg" },
-    { id:"skinny-alto",    nombre:"Skinny Tiro Alto",  categoria:"mujer",  color:"Negro",          talles:"36 – 44", precio:279000, enOferta:false, precioOferta:null,   stock:false, imagen:"images/product-skinny-alto.jpg" },
-    { id:"mom-fit",        nombre:"Mom Fit",           categoria:"mujer",  color:"Azul crudo",     talles:"36 – 44", precio:265000, enOferta:false, precioOferta:null,   stock:true,  imagen:"images/product-mom-fit.jpg" },
-    { id:"wide-leg",       nombre:"Wide Leg",          categoria:"mujer",  color:"Gris piedra",    talles:"36 – 44", precio:289000, enOferta:true,  precioOferta:259000, stock:true,  imagen:"images/product-wide-leg.jpg" },
-    { id:"slim-straight",  nombre:"Slim Straight",     categoria:"hombre", color:"Stone wash",     talles:"38 – 46", precio:269000, enOferta:false, precioOferta:null,   stock:true,  imagen:"images/product-slim-straight.jpg" },
-    { id:"cargo-denim",    nombre:"Cargo Denim",       categoria:"unisex", color:"Índigo",         talles:"36 – 46", precio:299000, enOferta:false, precioOferta:null,   stock:true,  imagen:"images/product-cargo-denim.jpg" },
-    { id:"flare-retro",    nombre:"Flare Retro",       categoria:"mujer",  color:"Azul medio",     talles:"36 – 42", precio:285000, enOferta:true,  precioOferta:249000, stock:true,  imagen:"images/product-flare-retro.jpg" },
-    { id:"straight-crudo", nombre:"Straight Crudo",    categoria:"hombre", color:"Crudo",          talles:"38 – 46", precio:259000, enOferta:false, precioOferta:null,   stock:true,  imagen:"images/product-straight-crudo.jpg" }
+    { id:"recto-clasico",  nombre:"Recto Clásico",     categoria:"hombre", color:"Índigo oscuro", talles:"38 – 46", precio:259000, enOferta:false, precioOferta:null,   stock:true,  image:"images/product-recto-clasico.jpg" },
+    { id:"skinny-alto",    nombre:"Skinny Tiro Alto",  categoria:"mujer",  color:"Negro",          talles:"36 – 44", precio:279000, enOferta:false, precioOferta:null,   stock:false, image:"images/product-skinny-alto.jpg" },
+    { id:"mom-fit",        nombre:"Mom Fit",           categoria:"mujer",  color:"Azul crudo",     talles:"36 – 44", precio:265000, enOferta:false, precioOferta:null,   stock:true,  image:"images/product-mom-fit.jpg" },
+    { id:"wide-leg",       nombre:"Wide Leg",          categoria:"mujer",  color:"Gris piedra",    talles:"36 – 44", precio:289000, enOferta:true,  precioOferta:259000, stock:true,  image:"images/product-wide-leg.jpg" },
+    { id:"slim-straight",  nombre:"Slim Straight",     categoria:"hombre", color:"Stone wash",     talles:"38 – 46", precio:269000, enOferta:false, precioOferta:null,   stock:true,  image:"images/product-slim-straight.jpg" },
+    { id:"cargo-denim",    nombre:"Cargo Denim",       categoria:"unisex", color:"Índigo",         talles:"36 – 46", precio:299000, enOferta:false, precioOferta:null,   stock:true,  image:"images/product-cargo-denim.jpg" },
+    { id:"flare-retro",    nombre:"Flare Retro",       categoria:"mujer",  color:"Azul medio",     talles:"36 – 42", precio:285000, enOferta:true,  precioOferta:249000, stock:true,  image:"images/product-flare-retro.jpg" },
+    { id:"straight-crudo", nombre:"Straight Crudo",    categoria:"hombre", color:"Crudo",          talles:"38 – 46", precio:259000, enOferta:false, precioOferta:null,   stock:true,  image:"images/product-straight-crudo.jpg" }
   ];
 
   function formatearGs(n){
@@ -677,7 +677,7 @@
     return (
       '<article class="card' + (agotado ? ' card-agotado' : '') + '" data-cat="' + p.categoria + '">' +
         '<div class="card-swatch">' +
-          '<img src="' + p.imagen + '" alt="Jean ' + p.nombre + '" width="720" height="960">' +
+          '<img src="' + p.image + '" alt="Jean ' + p.nombre + '" width="720" height="960">' +
           '<div class="card-price">' + precioHTML + '</div>' +
           (agotado ? '<div class="card-ribbon">Agotado</div>' : '') +
           (!agotado && p.enOferta ? '<div class="card-badge-oferta">Oferta</div>' : '') +
