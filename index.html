@@ -706,5 +706,21 @@
     .then(function(data){ pintarCatalogo((data && data.productos) || PRODUCTOS_RESPALDO); })
     .catch(function(){ pintarCatalogo(PRODUCTOS_RESPALDO); });
 </script>
+
+<!-- Netlify Identity: necesario acá (no solo en /admin) porque el link de
+     invitación / recuperación de contraseña que manda Netlify apunta a la
+     página principal del sitio. Sin este script, ese link no hace nada. -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', function (user) {
+      if (!user) {
+        window.netlifyIdentity.on('login', function () {
+          document.location.href = '/admin/';
+        });
+      }
+    });
+  }
+</script>
 </body>
 </html>
