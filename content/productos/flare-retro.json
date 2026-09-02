@@ -1,0 +1,13 @@
+{
+  "id": "flare-retro",
+  "nombre": "Flare Retro",
+  "categoria": "mujer",
+  "color": "Azul medio",
+  "talles": "36 – 42",
+  "precio": 285000,
+  "enOferta": true,
+  "precioOferta": 249000,
+  "stock": true,
+  "imagen": "images/product-flare-retro.jpg",
+  "orden": 7
+}

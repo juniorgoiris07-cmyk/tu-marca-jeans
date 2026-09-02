@@ -1,0 +1,13 @@
+{
+  "id": "slim-straight",
+  "nombre": "Slim Straight",
+  "categoria": "hombre",
+  "color": "Stone wash",
+  "talles": "38 – 46",
+  "precio": 269000,
+  "enOferta": false,
+  "precioOferta": null,
+  "stock": true,
+  "imagen": "images/product-slim-straight.jpg",
+  "orden": 5
+}

@@ -1,0 +1,13 @@
+{
+  "id": "recto-clasico",
+  "nombre": "Recto Clásico",
+  "categoria": "hombre",
+  "color": "Índigo oscuro",
+  "talles": "38 – 46",
+  "precio": 259000,
+  "enOferta": false,
+  "precioOferta": null,
+  "stock": true,
+  "imagen": "images/product-recto-clasico.jpg",
+  "orden": 1
+}

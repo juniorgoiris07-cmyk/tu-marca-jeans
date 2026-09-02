@@ -1,0 +1,13 @@
+{
+  "id": "straight-crudo",
+  "nombre": "Straight Crudo",
+  "categoria": "hombre",
+  "color": "Crudo",
+  "talles": "38 – 46",
+  "precio": 259000,
+  "enOferta": false,
+  "precioOferta": null,
+  "stock": true,
+  "imagen": "images/product-straight-crudo.jpg",
+  "orden": 8
+}

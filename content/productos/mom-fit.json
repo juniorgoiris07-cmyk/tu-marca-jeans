@@ -1,0 +1,13 @@
+{
+  "id": "mom-fit",
+  "nombre": "Mom Fit",
+  "categoria": "mujer",
+  "color": "Azul crudo",
+  "talles": "36 – 44",
+  "precio": 265000,
+  "enOferta": false,
+  "precioOferta": null,
+  "stock": true,
+  "imagen": "images/product-mom-fit.jpg",
+  "orden": 3
+}

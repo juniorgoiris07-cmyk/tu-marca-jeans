@@ -1,0 +1,13 @@
+{
+  "id": "cargo-denim",
+  "nombre": "Cargo Denim",
+  "categoria": "unisex",
+  "color": "Índigo",
+  "talles": "36 – 46",
+  "precio": 299000,
+  "enOferta": false,
+  "precioOferta": null,
+  "stock": true,
+  "imagen": "images/product-cargo-denim.jpg",
+  "orden": 6
+}

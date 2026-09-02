@@ -1,0 +1,13 @@
+{
+  "id": "skinny-alto",
+  "nombre": "Skinny Tiro Alto",
+  "categoria": "mujer",
+  "color": "Negro",
+  "talles": "36 – 44",
+  "precio": 279000,
+  "enOferta": false,
+  "precioOferta": null,
+  "stock": false,
+  "imagen": "images/product-skinny-alto.jpg",
+  "orden": 2
+}

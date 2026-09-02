@@ -1,0 +1,13 @@
+{
+  "id": "wide-leg",
+  "nombre": "Wide Leg",
+  "categoria": "mujer",
+  "color": "Gris piedra",
+  "talles": "36 – 44",
+  "precio": 289000,
+  "enOferta": true,
+  "precioOferta": 259000,
+  "stock": true,
+  "imagen": "images/product-wide-leg.jpg",
+  "orden": 4
+}
