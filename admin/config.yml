@@ -45,5 +45,5 @@ collections:
       - { label: "¿Está en oferta ahora?", name: "enOferta", widget: "boolean", default: false }
       - { label: "Precio con oferta (Gs.) — solo si está en oferta", name: "precioOferta", widget: "number", value_type: "int", min: 0, required: false }
       - { label: "¿Hay stock disponible?", name: "stock", widget: "boolean", default: true }
-      - { label: "Foto del producto", name: "imagen", widget: "image" }
+      - { label: "Foto del producto", name: "image", widget: "image" }
       - { label: "Orden de aparición (menor número = aparece primero)", name: "orden", widget: "number", value_type: "int", default: 100 }
