@@ -16,6 +16,8 @@ collections:
     folder: "content/productos"
     create: true
     delete: true
+    extension: "json"
+    format: "json"
     slug: "{{fields.id}}"
     identifier_field: "nombre"
     summary: "{{fields.nombre}} — {{fields.categoria}} — Gs. {{fields.precio}}"
