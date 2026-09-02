@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel de administración — TU MARCA</title>
+  <link rel="icon" href="../images/favicon.ico" sizes="any">
+</head>
+<body>
+  <!-- Login del panel: lo maneja Netlify Identity. No hace falta tocar nada acá. -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", function (user) {
+        if (!user) {
+          window.netlifyIdentity.on("login", function () {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+  <!-- El panel de edición en sí (Decap CMS, antes llamado Netlify CMS). -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Esto hace que "Publicar" en el panel guarde los cambios directo en el
+# sitio (no queda una versión "borrador" pendiente de aprobar).
+publish_mode: simple
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: "productos"
+    label: "Catálogo de productos"
+    files:
+      - name: "productos"
+        label: "Productos del catálogo"
+        file: "content/productos.json"
+        fields:
+          - label: "Productos"
+            name: "productos"
+            widget: "list"
+            summary: "{{fields.nombre}} — {{fields.categoria}}"
+            fields:
+              - { label: "ID interno (sin espacios ni tildes, ej. mom-fit-2)", name: "id", widget: "string" }
+              - { label: "Nombre del modelo", name: "nombre", widget: "string" }
+              - label: "Categoría"
+                name: "categoria"
+                widget: "select"
+                options:
+                  - { label: "Hombre", value: "hombre" }
+                  - { label: "Mujer", value: "mujer" }
+                  - { label: "Unisex", value: "unisex" }
+              - { label: "Color / detalle", name: "color", widget: "string" }
+              - { label: "Talles (ej. 38 – 46)", name: "talles", widget: "string" }
+              - { label: "Precio normal (Gs.)", name: "precio", widget: "number", value_type: "int", min: 0 }
+              - { label: "¿Está en oferta ahora?", name: "enOferta", widget: "boolean", default: false }
+              - { label: "Precio con oferta (Gs.) — solo si está en oferta", name: "precioOferta", widget: "number", value_type: "int", min: 0, required: false }
+              - { label: "¿Hay stock disponible?", name: "stock", widget: "boolean", default: true }
+              - { label: "Foto del producto", name: "imagen", widget: "image" }
