@@ -8,6 +8,6 @@
   "enOferta": true,
   "precioOferta": 259000,
   "stock": true,
-  "imagen": "images/product-wide-leg.jpg",
-  "orden": 4
+  "orden": 4,
+  "image": "images/product-wide-leg.jpg"
 }

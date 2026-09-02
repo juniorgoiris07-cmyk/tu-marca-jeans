@@ -8,6 +8,6 @@
   "enOferta": false,
   "precioOferta": null,
   "stock": true,
-  "imagen": "images/product-straight-crudo.jpg",
-  "orden": 8
+  "orden": 8,
+  "image": "images/product-straight-crudo.jpg"
 }

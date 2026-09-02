@@ -8,6 +8,6 @@
   "enOferta": false,
   "precioOferta": null,
   "stock": true,
-  "imagen": "images/product-recto-clasico.jpg",
-  "orden": 1
+  "orden": 1,
+  "image": "images/product-recto-clasico.jpg"
 }

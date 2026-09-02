@@ -8,6 +8,6 @@
   "enOferta": false,
   "precioOferta": null,
   "stock": true,
-  "imagen": "images/product-mom-fit.jpg",
-  "orden": 3
+  "orden": 3,
+  "image": "images/product-mom-fit.jpg"
 }

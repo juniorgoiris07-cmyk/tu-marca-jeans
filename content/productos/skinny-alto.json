@@ -8,6 +8,6 @@
   "enOferta": false,
   "precioOferta": null,
   "stock": false,
-  "imagen": "images/product-skinny-alto.jpg",
-  "orden": 2
+  "orden": 2,
+  "image": "images/product-skinny-alto.jpg"
 }

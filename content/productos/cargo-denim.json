@@ -8,6 +8,6 @@
   "enOferta": false,
   "precioOferta": null,
   "stock": true,
-  "imagen": "images/product-cargo-denim.jpg",
-  "orden": 6
+  "orden": 6,
+  "image": "images/product-cargo-denim.jpg"
 }

@@ -8,6 +8,6 @@
   "enOferta": true,
   "precioOferta": 249000,
   "stock": true,
-  "imagen": "images/product-flare-retro.jpg",
-  "orden": 7
+  "orden": 7,
+  "image": "images/product-flare-retro.jpg"
 }

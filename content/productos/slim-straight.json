@@ -8,6 +8,6 @@
   "enOferta": false,
   "precioOferta": null,
   "stock": true,
-  "imagen": "images/product-slim-straight.jpg",
-  "orden": 5
+  "orden": 5,
+  "image": "images/product-slim-straight.jpg"
 }
