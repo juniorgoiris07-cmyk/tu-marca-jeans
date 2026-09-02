@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="images/favicon.ico" sizes="any">
+<link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="images/favicon-16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<title>TU MARCA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     TOKENS
+  ========================================================= */
+  :root{
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f7f7f7;
+    --ink: #14161c;
+    --ink-muted: #585b64;
+    --ink-faint: #8d909a;
+    --accent: #223357;       /* confident deep indigo — single accent system */
+    --accent-ink: #ffffff;
+    --accent-soft: #6577a4;  /* lighter indigo for accents on dark grounds */
+    --line: rgba(20,22,28,0.12);
+    --line-strong: rgba(20,22,28,0.24);
+    --shadow: 0 14px 30px -20px rgba(15,17,22,0.30);
+
+    --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', serif;
+    --font-body: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+    --font-label: 'IBM Plex Mono', 'Courier New', monospace;
+
+    --container: 1180px;
+
+    /* Footer follows the page palette (no separate dark band) — these just
+       alias the theme tokens so it stays light in light mode. */
+    --footer-bg: var(--surface-2);
+    --footer-ink: var(--ink);
+    --footer-ink-muted: var(--ink-muted);
+    --footer-line: var(--line-strong);
+  }
+
+  /* La página se queda siempre en modo claro/blanco, a propósito:
+     no sigue el modo oscuro del sistema ni del navegador. */
+
+  /* =========================================================
+     RESET
+  ========================================================= */
+  *,*::before,*::after{ box-sizing: border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  ul{ margin:0; padding:0; list-style:none; }
+  h1,h2,h3,h4,p,figure{ margin:0; }
+  h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; letter-spacing:-0.01em; text-wrap:balance; }
+  button{ font:inherit; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+  html{ scroll-behavior:smooth; }
+
+  .wrap{ max-width:var(--container); margin:0 auto; padding:0 28px; }
+  .eyebrow{
+    font-family:var(--font-label); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--accent); }
+  .section{ padding:96px 0; border-top:1px solid var(--line); }
+  .section-head{ max-width:640px; margin-bottom:52px; }
+  .section-head p{ color:var(--ink-muted); margin-top:14px; font-size:17px; }
+  h2.title{ font-size:clamp(28px,3.6vw,42px); }
+
+  /* twill texture — a quiet nod to denim weave, kept fine and low-contrast
+     so it reads as material, not decoration */
+  .twill{
+    background-image:
+      repeating-linear-gradient(45deg, color-mix(in srgb, var(--accent) 22%, transparent) 0 1px, transparent 1px 10px),
+      repeating-linear-gradient(-45deg, color-mix(in srgb, var(--ink) 14%, transparent) 0 1px, transparent 1px 13px);
+  }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:10px; padding:14px 26px;
+    font-family:var(--font-label); font-size:13px; letter-spacing:.06em; text-transform:uppercase;
+    border-radius:2px; border:1px solid var(--line-strong); cursor:pointer; text-decoration:none;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .btn-primary:hover{ background:color-mix(in srgb, var(--accent) 88%, black 12%); }
+  .btn-ghost{ background:transparent; color:var(--ink); }
+  .btn-ghost:hover{ border-color:var(--ink); }
+  .btn svg{ width:16px; height:16px; }
+
+  /* =========================================================
+     HEADER
+  ========================================================= */
+  header{
+    position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:20px 0; gap:24px; }
+  .logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo-mark{
+    width:34px; height:34px; border-radius:2px; background:var(--accent); color:var(--accent-ink);
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:600; font-size:15px;
+    /* EDITAR: si tenés un logo en imagen, reemplazá este div por <img src="tu-logo.png" alt="Tu Marca" style="width:34px;height:34px;border-radius:2px;"> */
+  }
+  .logo-word{ font-family:var(--font-display); font-size:19px; font-weight:600; letter-spacing:.01em; }
+  .nav-links{ display:flex; gap:32px; font-size:14.5px; }
+  .nav-links a{ text-decoration:none; color:var(--ink-muted); position:relative; padding:4px 0; }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-actions{ display:flex; align-items:center; gap:14px; }
+  .nav-toggle{ display:none; background:none; border:0; padding:6px; cursor:pointer; }
+  .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{
+    content:""; display:block; width:22px; height:2px; background:var(--ink); position:relative; transition:.2s;
+  }
+  .nav-toggle span::before{ position:absolute; top:-7px; width:22px; height:2px; background:var(--ink); }
+  .nav-toggle span::after{ position:absolute; top:7px; width:22px; height:2px; background:var(--ink); }
+
+  @media (max-width:860px){
+    .nav-links{
+      position:absolute; top:100%; left:0; right:0; background:var(--bg); border-bottom:1px solid var(--line);
+      flex-direction:column; gap:0; padding:8px 28px 18px; display:none;
+    }
+    .nav-links.open{ display:flex; }
+    .nav-links a{ padding:12px 0; border-bottom:1px solid var(--line); }
+    .nav-toggle{ display:block; }
+    .nav-actions .btn-primary{ padding:11px 16px; }
+  }
+
+  /* =========================================================
+     HERO
+  ========================================================= */
+  .hero{ padding:64px 0 88px; }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+  .hero h1{ font-size:clamp(38px,5.4vw,64px); line-height:1.04; }
+  .hero h1 em{ font-style:normal; color:var(--accent); }
+  .hero-sub{ color:var(--ink-muted); font-size:18px; max-width:46ch; margin:22px 0 32px; }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .hero-tags{ display:flex; gap:22px; margin-top:40px; flex-wrap:wrap; }
+  .hero-tag{ font-family:var(--font-label); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); display:flex; align-items:center; gap:8px; }
+  .hero-tag svg{ width:14px; height:14px; color:var(--accent); }
+
+  .hero-visual{ position:relative; aspect-ratio:4/5; border-radius:6px; overflow:hidden; border:1px solid var(--line); background:var(--surface); }
+  .hero-visual .twill{ position:absolute; inset:0; opacity:.6; }
+  .hero-visual-inner{
+    position:absolute; inset:0; display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .hero-sketch{ flex:1; display:flex; align-items:center; justify-content:center; padding:34px; }
+  .hero-sketch svg{ width:100%; max-width:230px; color:var(--accent); }
+  .hero-badge{
+    display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+    padding:20px 24px; border-top:1px solid var(--line); background:var(--surface);
+    font-family:var(--font-label); color:var(--ink);
+  }
+  .hero-badge b{ display:block; font-family:var(--font-display); font-size:16px; font-weight:600; letter-spacing:0; margin-bottom:3px; }
+  .hero-badge span{ font-size:11.5px; letter-spacing:.03em; color:var(--ink-muted); max-width:22ch; }
+  .hero-badge em{ font-style:normal; font-size:11px; letter-spacing:.1em; color:var(--ink-faint); white-space:nowrap; }
+
+  /* =========================================================
+     VALUE PROPS
+  ========================================================= */
+  .props{ padding:44px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--surface); }
+  .props-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:32px; }
+  .prop{ display:flex; align-items:flex-start; gap:14px; }
+  .prop svg{ width:26px; height:26px; flex-shrink:0; color:var(--accent); }
+  .prop-title{ font-family:var(--font-display); font-size:16px; font-weight:600; margin-bottom:4px; }
+  .prop-desc{ font-size:13.5px; color:var(--ink-muted); }
+  @media (max-width:900px){ .props-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .props-grid{ grid-template-columns:1fr; } }
+
+  /* =========================================================
+     CATALOG
+  ========================================================= */
+  .cat-head{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; margin-bottom:40px; }
+  .filters{ display:flex; gap:8px; flex-wrap:wrap; }
+  .filter-btn{
+    font-family:var(--font-label); font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+    padding:9px 16px; border-radius:20px; border:1px solid var(--line-strong); background:transparent; color:var(--ink-muted); cursor:pointer;
+  }
+  .filter-btn:hover{ color:var(--ink); }
+  .filter-btn.active{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+
+  .grid-products{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
+  @media (max-width:1040px){ .grid-products{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .grid-products{ grid-template-columns:1fr; } }
+
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:3px; overflow:hidden;
+    display:flex; flex-direction:column; transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:var(--shadow); }
+  .card-swatch{ position:relative; aspect-ratio:3/4; background:var(--surface-2); }
+  .card-swatch img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .card-price{
+    position:absolute; top:12px; right:12px; background:var(--surface); color:var(--ink);
+    font-family:var(--font-label); font-size:13px; padding:6px 10px; border-radius:2px; box-shadow:var(--shadow);
+  }
+  .card-body{ padding:18px 18px 20px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .card-fit{ font-family:var(--font-display); font-size:18px; font-weight:600; }
+  .card-meta{ font-size:13px; color:var(--ink-muted); display:flex; justify-content:space-between; }
+  .card-sizes{ font-family:var(--font-label); font-size:11.5px; color:var(--ink-faint); letter-spacing:.04em; }
+  .card-cta{
+    margin-top:auto; display:flex; align-items:center; justify-content:center; gap:8px;
+    padding:11px; border-radius:2px; background:transparent; border:1px solid var(--line-strong);
+    font-family:var(--font-label); font-size:12.5px; letter-spacing:.05em; text-transform:uppercase;
+    text-decoration:none; color:var(--ink); transition:background .15s ease, color .15s ease;
+  }
+  .card-cta:hover{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .card-cta svg{ width:15px; height:15px; }
+  .card-cta-disabled{ cursor:default; color:var(--ink-faint); border-color:var(--line); }
+  .card-cta-disabled:hover{ background:transparent; color:var(--ink-faint); border-color:var(--line); transform:none; }
+  .card-agotado{ opacity:.62; }
+  .card-agotado .card-swatch img{ filter:grayscale(65%); }
+  .card-ribbon{
+    position:absolute; top:12px; left:12px; background:var(--ink); color:#fff;
+    font-family:var(--font-label); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    padding:5px 9px; border-radius:2px;
+  }
+  .card-badge-oferta{
+    position:absolute; bottom:12px; left:12px; background:#b3392b; color:#fff;
+    font-family:var(--font-label); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    padding:5px 9px; border-radius:2px;
+  }
+  .price-old{ text-decoration:line-through; color:var(--ink-faint); font-size:11px; margin-right:5px; }
+  .price-new{ color:#b3392b; font-weight:700; }
+  .grid-loading{ grid-column:1/-1; text-align:center; padding:60px 0; color:var(--ink-muted); font-family:var(--font-label); font-size:13px; letter-spacing:.04em; text-transform:uppercase; }
+
+  /* =========================================================
+     ABOUT
+  ========================================================= */
+  .about-grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:60px; align-items:center; }
+  .about-visual{ position:relative; aspect-ratio:1/1; border-radius:4px; overflow:hidden; background:var(--surface-2); }
+  .about-visual img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .about-visual::after{
+    content:""; position:absolute; inset:0; border:1px solid var(--line-strong); border-radius:4px;
+  }
+  .about-copy p{ color:var(--ink-muted); font-size:17px; margin-bottom:18px; max-width:56ch; }
+  .about-copy p:last-child{ margin-bottom:0; }
+  @media (max-width:860px){ .about-grid{ grid-template-columns:1fr; } }
+
+  /* =========================================================
+     FAQ
+  ========================================================= */
+  .faq-list{ max-width:760px; }
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-item summary{
+    cursor:pointer; list-style:none; padding:22px 0; display:flex; justify-content:space-between; align-items:center; gap:20px;
+    font-family:var(--font-display); font-size:18px; font-weight:600;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary .plus{ flex-shrink:0; width:22px; height:22px; position:relative; }
+  .faq-item summary .plus::before,.faq-item summary .plus::after{
+    content:""; position:absolute; background:var(--ink); transition:transform .2s ease;
+  }
+  .faq-item summary .plus::before{ top:50%; left:0; width:100%; height:1.5px; margin-top:-0.75px; }
+  .faq-item summary .plus::after{ left:50%; top:0; height:100%; width:1.5px; margin-left:-0.75px; }
+  .faq-item[open] summary .plus::after{ transform:rotate(90deg) scaleX(0); opacity:0; }
+  .faq-item p{ color:var(--ink-muted); padding-bottom:22px; max-width:64ch; font-size:15.5px; }
+
+  /* =========================================================
+     FOOTER
+  ========================================================= */
+  footer{ background:var(--footer-bg); color:var(--footer-ink); padding:64px 0 28px; border-top:1px solid var(--line); }
+  .foot-grid{ display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:40px; padding-bottom:44px; border-bottom:1px solid var(--footer-line); }
+  @media (max-width:760px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px){ .foot-grid{ grid-template-columns:1fr; gap:32px; } }
+  .foot-brand .logo-word{ color:var(--footer-ink); }
+  .foot-brand p{ color:var(--footer-ink-muted); font-size:14.5px; margin-top:14px; max-width:32ch; }
+  .foot-col h4{ font-family:var(--font-label); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--footer-ink-muted); margin-bottom:16px; font-weight:600; }
+  .foot-col a{ display:block; color:var(--footer-ink); opacity:.9; text-decoration:none; font-size:14.5px; padding:6px 0; }
+  .foot-col a:hover{ color:var(--accent); opacity:1; }
+  .foot-social{ display:flex; gap:12px; margin-top:6px; }
+  .foot-social a{ width:36px; height:36px; border:1px solid var(--footer-line); border-radius:2px; display:flex; align-items:center; justify-content:center; padding:0; opacity:1; }
+  .foot-social svg{ width:16px; height:16px; color:var(--footer-ink); }
+  .foot-bottom{ display:flex; justify-content:space-between; padding-top:24px; font-size:12.5px; color:var(--footer-ink-muted); flex-wrap:wrap; gap:10px; }
+
+  /* =========================================================
+     WHATSAPP FLOAT
+  ========================================================= */
+  .wa-float{
+    position:fixed; right:20px; bottom:20px; z-index:60; width:58px; height:58px; border-radius:50%;
+    background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 26px -8px rgba(0,0,0,.5);
+    text-decoration:none;
+  }
+  .wa-float svg{ width:28px; height:28px; color:#fff; }
+  .wa-float{ animation:pulse 2.6s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ box-shadow:0 10px 26px -8px rgba(37,211,102,.6);} 50%{ box-shadow:0 10px 30px -4px rgba(37,211,102,.85);} }
+
+  /* =========================================================
+     MOBILE — pensado para que se lea y se toque cómodo en celular,
+     no solo una versión encogida del diseño de escritorio.
+  ========================================================= */
+  @media (max-width:860px){
+    body{ font-size:16.5px; }
+
+    /* el héroe pasa de 2 columnas a una sola, con la imagen debajo del texto */
+    .hero{ padding:36px 0 48px; }
+    .hero-grid{ grid-template-columns:1fr; gap:36px; }
+    .hero-sub{ font-size:17px; }
+    .hero-visual{ aspect-ratio:6/5; }
+    .hero-sketch{ padding:24px; }
+    .hero-ctas{ flex-direction:column; align-items:stretch; }
+    .hero-ctas .btn{ width:100%; justify-content:center; padding:16px 24px; }
+    .hero-tags{ gap:14px 20px; }
+
+    .section{ padding:56px 0; }
+    .section-head{ margin-bottom:36px; }
+    .props{ padding:32px 0; }
+
+    /* botones y filtros más grandes para tocar con el dedo */
+    .btn{ font-size:13.5px; padding:15px 22px; }
+    .filter-btn{ padding:11px 18px; font-size:13px; }
+    .nav-toggle{ padding:10px; }
+    .nav-actions .btn-primary{ padding:13px 18px; }
+
+    /* texto de catálogo un poco más grande, se leía chico */
+    .eyebrow{ font-size:13.5px; }
+    .card-fit{ font-size:19px; }
+    .card-meta{ font-size:14px; }
+    .card-sizes{ font-size:12px; }
+    .card-price{ font-size:13.5px; padding:7px 11px; }
+    .card-cta{ padding:14px; font-size:13px; }
+    .card-body{ padding:20px; gap:12px; }
+
+    .about-copy p{ font-size:16.5px; }
+    .faq-item summary{ font-size:17px; padding:20px 0; }
+    .faq-item p{ font-size:16px; }
+
+    .foot-col a{ font-size:15.5px; padding:9px 0; }
+    .foot-brand p{ font-size:15px; }
+  }
+
+  @media (max-width:480px){
+    .hero h1{ font-size:34px; }
+    .grid-products{ gap:20px; }
+    .wa-float{ width:54px; height:54px; right:16px; bottom:16px; }
+    .wa-float svg{ width:25px; height:25px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==========================================================================
+  GUÍA RÁPIDA DE EDICIÓN (esto es un comentario, no se ve en la web)
+
+  1) NOMBRE DE MARCA: buscá "TU MARCA" (aparece en el <title>, el header y el footer) y reemplazalo.
+  2) LOGO: en el header hay un <div class="logo-mark"> con las iniciales "TM". Si tenés un logo en
+     imagen, reemplazá ese div por <img src="tu-logo.png" alt="Tu Marca">. La instrucción exacta
+     está comentada justo al lado, dentro del header.
+  3) WHATSAPP: el número de ejemplo es 595981234567. Buscá y reemplazá ese número en TODOS los
+     enlaces que empiezan con "https://wa.me/" (hay uno en el header, uno por cada producto del
+     catálogo y uno flotante al final de la página).
+  4) PRECIOS Y PRODUCTOS: el catálogo YA NO está escrito acá adentro. Se carga solo desde el
+     archivo "content/productos.json" (uno de los datos ahí = un jean del catálogo: nombre,
+     precio, talles, si está en oferta, si hay stock, y la foto). Para agregar, editar o sacar
+     un producto, o marcarlo sin stock / en oferta, hay dos caminos:
+       a) Editar ese archivo a mano con cualquier editor de texto.
+       b) Usar el panel de administración (recomendado): abrí PANEL-ADMIN.txt para la guía paso
+          a paso — es un panel con usuario y contraseña, con formularios, sin tocar código.
+  5) FOTOS DE PRODUCTO: están en la carpeta "images/" (por ahora son texturas de tela genéricas,
+     de relleno, no fotos reales). El nombre de archivo de cada foto se define en
+     content/productos.json (campo "imagen"), o se sube directo desde el panel de administración.
+     Usá fotos en formato vertical (relación 3:4, por ejemplo 900x1200px) para que se vean bien
+     recortadas.
+  6) REDES E INSTAGRAM: buscá "instagram.com/tu_usuario" y "facebook.com/tu_pagina" en el footer.
+
+  Esta carpeta está lista para probar en Netlify: mirá README.txt.
+  Para activar el panel de administración: mirá PANEL-ADMIN.txt.
+=========================================================================== -->
+
+<header>
+  <div class="wrap nav">
+    <a href="#inicio" class="logo">
+      <!-- LOGO: si tenés una imagen, reemplazá el div de abajo por:
+           <img src="tu-logo.png" alt="Tu Marca" style="width:34px;height:34px;border-radius:2px;object-fit:cover;"> -->
+      <div class="logo-mark">TM</div>
+      <span class="logo-word">TU MARCA</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-primary" href="https://wa.me/595981234567?text=Hola%2C%20quiero%20consultar%20por%20un%20jean" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.4-.1-.1-.6-1.4-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.8 4.4 3.8.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3Z"/></svg>
+        WhatsApp
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="inicio">
+  <!-- ============================= HERO ============================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Nueva colección</p>
+        <h1>El jean que se <em>siente</em>,<br>no solo se ve.</h1>
+        <p class="hero-sub">
+          Cortes pensados para el cuerpo real, denim seleccionado tela por tela y una compra
+          tan simple como escribirnos por WhatsApp. Sin vueltas, sin apuro.
+        </p>
+        <div class="hero-ctas">
+          <a href="#catalogo" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2 4 6v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V6l-2-4M6 2h12M6 2l1.5 4h9L18 2"/><path d="M9 10a3 3 0 0 0 6 0"/></svg>
+            Ver catálogo
+          </a>
+          <a href="https://wa.me/595981234567?text=Hola%2C%20quiero%20consultar%20por%20un%20jean" target="_blank" rel="noopener" class="btn btn-ghost">
+            Escribinos por WhatsApp
+          </a>
+        </div>
+        <div class="hero-tags">
+          <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Cambios en 15 días</span>
+          <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Envíos a todo el país</span>
+          <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Talles 36 – 46</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-visual-inner">
+          <div class="twill"></div>
+          <div class="hero-sketch">
+            <svg viewBox="0 0 240 320" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="70" y="24" width="100" height="20" rx="5"/>
+              <line x1="70" y1="34" x2="170" y2="34" stroke-dasharray="1 6"/>
+              <rect x="80" y="16" width="5" height="10" rx="1.5"/>
+              <rect x="102" y="16" width="5" height="10" rx="1.5"/>
+              <rect x="133" y="16" width="5" height="10" rx="1.5"/>
+              <rect x="155" y="16" width="5" height="10" rx="1.5"/>
+              <line x1="120" y1="44" x2="120" y2="142"/>
+              <path d="M78 44 C58 92 48 140 44 210 L40 300"/>
+              <path d="M120 142 C112 200 100 250 96 300"/>
+              <path d="M162 44 C182 92 192 140 196 210 L200 300"/>
+              <path d="M120 142 C128 200 140 250 144 300"/>
+              <line x1="40" y1="300" x2="96" y2="300"/>
+              <line x1="144" y1="300" x2="200" y2="300"/>
+              <path d="M68 52 L52 78" stroke-width="1.6"/>
+              <path d="M172 52 L188 78" stroke-width="1.6"/>
+              <circle cx="52" cy="78" r="3" fill="currentColor" stroke="none"/>
+              <circle cx="188" cy="78" r="3" fill="currentColor" stroke="none"/>
+              <circle cx="120" cy="150" r="2.6" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="hero-badge">
+            <div>
+              <b>Denim ring-spun</b>
+              <span>100% algodón premium, costura doble aguja, remaches reforzados</span>
+            </div>
+            <em>N.º 001</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= VALUE PROPS ============================= -->
+  <section class="props">
+    <div class="wrap props-grid">
+      <div class="prop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="15" height="11" rx="1"/><path d="M17 10h3l2 3v5h-5"/><circle cx="7" cy="18.5" r="1.6"/><circle cx="18" cy="18.5" r="1.6"/></svg>
+        <div><div class="prop-title">Envíos a todo el país</div><div class="prop-desc">Coordinamos el envío apenas confirmás tu pedido por WhatsApp.</div></div>
+      </div>
+      <div class="prop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4v6h6"/><path d="M20 20v-6h-6"/><path d="M5.5 9A7 7 0 0 1 19 10M18.5 15A7 7 0 0 1 5 14"/></svg>
+        <div><div class="prop-title">Cambios sin drama</div><div class="prop-desc">15 días para cambiar el talle si no calzó como esperabas.</div></div>
+      </div>
+      <div class="prop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 20l1-4.5a8.38 8.38 0 0 1-1-4A8.5 8.5 0 0 1 11.5 3 8.38 8.38 0 0 1 21 11.5Z"/></svg>
+        <div><div class="prop-title">Atención directa</div><div class="prop-desc">Consultás talle, foto real y stock por WhatsApp antes de pagar.</div></div>
+      </div>
+      <div class="prop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg>
+        <div><div class="prop-title">Denim seleccionado</div><div class="prop-desc">Cada modelo se elige por caída, corte y calidad de costura.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= CATÁLOGO ============================= -->
+  <section class="section" id="catalogo">
+    <div class="wrap">
+      <div class="cat-head">
+        <div class="section-head" style="margin-bottom:0">
+          <p class="eyebrow">Catálogo</p>
+          <h2 class="title">Modelos disponibles</h2>
+        </div>
+        <div class="filters" id="filters">
+          <button class="filter-btn active" data-filter="todos">Todos</button>
+          <button class="filter-btn" data-filter="mujer">Mujer</button>
+          <button class="filter-btn" data-filter="hombre">Hombre</button>
+          <button class="filter-btn" data-filter="unisex">Unisex</button>
+        </div>
+      </div>
+
+      <div class="grid-products" id="productGrid">
+        <!-- Este contenido lo llena solo el script de más abajo, leyendo
+             content/productos.json. No hace falta editar nada acá a mano. -->
+        <p class="grid-loading">Cargando catálogo…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= NOSOTROS ============================= -->
+  <section class="section" id="nosotros">
+    <div class="wrap about-grid">
+      <div class="about-visual"><img src="images/about-denim.jpg" alt="Detalle de tela denim" width="900" height="900" loading="lazy"></div>
+      <div class="about-copy">
+        <p class="eyebrow">Nosotros</p>
+        <h2 class="title" style="margin-bottom:22px">Empezamos con una idea simple</h2>
+        <p>
+          El jean perfecto no debería ser difícil de encontrar. En <strong>TU MARCA</strong> elegimos
+          cada modelo pensando en el corte, la caída de la tela y la calidad de la costura —
+          no solo en la tendencia del momento.
+        </p>
+        <p>
+          Cada compra se coordina directo con nosotros por WhatsApp: preguntás el talle, pedís
+          fotos reales de la prenda y recibís tu pedido donde estés, sin pasos de más.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= PREGUNTAS ============================= -->
+  <section class="section" id="preguntas">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2 class="title">Antes de escribirnos</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>¿Cómo sé cuál es mi talle?<span class="plus"></span></summary>
+          <p>Medí tu cintura con una cinta métrica, sin ajustar de más. Como guía general: talle 38 ≈ 72–76 cm, talle 40 ≈ 77–81 cm, talle 42 ≈ 82–86 cm, talle 44 ≈ 87–91 cm. Si tenés dudas, mandanos tu medida por WhatsApp y te confirmamos el talle antes de que compres.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Hacen cambios o devoluciones?<span class="plus"></span></summary>
+          <p>Sí, tenés 15 días desde que recibís tu pedido para cambiarlo, siempre que la prenda esté sin uso y con la etiqueta puesta. Coordinamos el cambio por WhatsApp.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Qué métodos de pago aceptan?<span class="plus"></span></summary>
+          <p><!-- EDITAR: completá con tus métodos reales --> Transferencia bancaria, efectivo contra entrega y tarjeta. Te confirmamos las opciones disponibles al coordinar tu pedido por WhatsApp.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Cuánto tarda el envío?<span class="plus"></span></summary>
+          <p><!-- EDITAR: completá tus tiempos reales --> Dentro de la ciudad, entre 24 y 48 horas. Al interior del país, entre 3 y 5 días hábiles según la agencia de encomiendas.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Cómo cuido mi jean para que dure más?<span class="plus"></span></summary>
+          <p>Lavalo del revés, con agua fría y ciclo suave, lo menos posible. Evitá la secadora: colgado a la sombra mantiene mejor el color y la forma de la tela.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo-word">TU MARCA</span>
+        <p>Jeans seleccionados por corte, caída y calidad de costura. Compra simple, por WhatsApp.</p>
+        <div class="foot-social">
+          <a href="https://instagram.com/tu_usuario" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+          <a href="https://facebook.com/tu_pagina" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 4h-2a4 4 0 0 0-4 4v2H7v3h2v7h3v-7h2.5l.5-3H12V8a1 1 0 0 1 1-1h2Z"/></svg></a>
+          <a href="https://wa.me/595981234567" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Explorar</h4>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#preguntas">Preguntas frecuentes</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <a href="https://wa.me/595981234567" target="_blank" rel="noopener">+595 981 234 567</a>
+        <a href="mailto:hola@tumarca.com">hola@tumarca.com</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> TU MARCA. Todos los derechos reservados.</span>
+      <span>Hecho con cuidado, un jean a la vez.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/595981234567?text=Hola%2C%20quiero%20consultar%20por%20un%20jean" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.4-.1-.1-.6-1.4-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.8 4.4 3.8.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3Z"/></svg>
+</a>
+
+<script>
+  // Menú móvil
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+  });
+
+  // Filtro de catálogo (busca las tarjetas al momento del click, porque
+  // el catálogo se genera dinámicamente y puede no existir todavía al cargar la página)
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filterBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      document.querySelectorAll('#productGrid .card').forEach(function(card){
+        card.style.display = (f === 'todos' || card.getAttribute('data-cat') === f) ? '' : 'none';
+      });
+    });
+  });
+
+  // Año dinámico en el footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // =========================================================
+  // CATÁLOGO DINÁMICO
+  // Lee content/productos.json (lo edita el panel de administración,
+  // ver PANEL-ADMIN.txt) y arma las tarjetas. Si por algo no se puede
+  // leer ese archivo (por ejemplo, abriendo index.html con doble clic
+  // en vez de por un servidor), usa esta misma lista como respaldo.
+  // =========================================================
+  var WHATSAPP_NUMERO = "595981234567";
+
+  var PRODUCTOS_RESPALDO = [
+    { id:"recto-clasico",  nombre:"Recto Clásico",     categoria:"hombre", color:"Índigo oscuro", talles:"38 – 46", precio:259000, enOferta:false, precioOferta:null,   stock:true,  imagen:"images/product-recto-clasico.jpg" },
+    { id:"skinny-alto",    nombre:"Skinny Tiro Alto",  categoria:"mujer",  color:"Negro",          talles:"36 – 44", precio:279000, enOferta:false, precioOferta:null,   stock:false, imagen:"images/product-skinny-alto.jpg" },
+    { id:"mom-fit",        nombre:"Mom Fit",           categoria:"mujer",  color:"Azul crudo",     talles:"36 – 44", precio:265000, enOferta:false, precioOferta:null,   stock:true,  imagen:"images/product-mom-fit.jpg" },
+    { id:"wide-leg",       nombre:"Wide Leg",          categoria:"mujer",  color:"Gris piedra",    talles:"36 – 44", precio:289000, enOferta:true,  precioOferta:259000, stock:true,  imagen:"images/product-wide-leg.jpg" },
+    { id:"slim-straight",  nombre:"Slim Straight",     categoria:"hombre", color:"Stone wash",     talles:"38 – 46", precio:269000, enOferta:false, precioOferta:null,   stock:true,  imagen:"images/product-slim-straight.jpg" },
+    { id:"cargo-denim",    nombre:"Cargo Denim",       categoria:"unisex", color:"Índigo",         talles:"36 – 46", precio:299000, enOferta:false, precioOferta:null,   stock:true,  imagen:"images/product-cargo-denim.jpg" },
+    { id:"flare-retro",    nombre:"Flare Retro",       categoria:"mujer",  color:"Azul medio",     talles:"36 – 42", precio:285000, enOferta:true,  precioOferta:249000, stock:true,  imagen:"images/product-flare-retro.jpg" },
+    { id:"straight-crudo", nombre:"Straight Crudo",    categoria:"hombre", color:"Crudo",          talles:"38 – 46", precio:259000, enOferta:false, precioOferta:null,   stock:true,  imagen:"images/product-straight-crudo.jpg" }
+  ];
+
+  function formatearGs(n){
+    return "Gs. " + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  function etiquetaCategoria(c){
+    return { hombre:"Hombre", mujer:"Mujer", unisex:"Unisex" }[c] || c;
+  }
+  function whatsappHref(nombreProducto){
+    var texto = "Hola, me interesa el jean " + nombreProducto;
+    return "https://wa.me/" + WHATSAPP_NUMERO + "?text=" + encodeURIComponent(texto);
+  }
+  var ICONO_WHATSAPP = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg>';
+
+  function tarjetaHTML(p){
+    var agotado = p.stock === false;
+    var precioHTML = (p.enOferta && p.precioOferta)
+      ? '<span class="price-old">' + formatearGs(p.precio) + '</span><span class="price-new">' + formatearGs(p.precioOferta) + '</span>'
+      : formatearGs(p.precio);
+    var ctaHTML = agotado
+      ? '<span class="card-cta card-cta-disabled">Sin stock por ahora</span>'
+      : '<a class="card-cta" href="' + whatsappHref(p.nombre) + '" target="_blank" rel="noopener">' + ICONO_WHATSAPP + 'Consultar</a>';
+
+    return (
+      '<article class="card' + (agotado ? ' card-agotado' : '') + '" data-cat="' + p.categoria + '">' +
+        '<div class="card-swatch">' +
+          '<img src="' + p.imagen + '" alt="Jean ' + p.nombre + '" width="720" height="960">' +
+          '<div class="card-price">' + precioHTML + '</div>' +
+          (agotado ? '<div class="card-ribbon">Agotado</div>' : '') +
+          (!agotado && p.enOferta ? '<div class="card-badge-oferta">Oferta</div>' : '') +
+        '</div>' +
+        '<div class="card-body">' +
+          '<div class="card-fit">' + p.nombre + '</div>' +
+          '<div class="card-meta"><span>' + p.color + '</span><span>' + etiquetaCategoria(p.categoria) + '</span></div>' +
+          '<div class="card-sizes">TALLES ' + p.talles + '</div>' +
+          ctaHTML +
+        '</div>' +
+      '</article>'
+    );
+  }
+
+  function pintarCatalogo(lista){
+    var grid = document.getElementById('productGrid');
+    if (!lista || !lista.length) {
+      grid.innerHTML = '<p class="grid-loading">Todavía no hay productos cargados.</p>';
+      return;
+    }
+    grid.innerHTML = lista.map(tarjetaHTML).join('');
+  }
+
+  fetch('content/productos.json', { cache: 'no-store' })
+    .then(function(r){ if (!r.ok) throw new Error('no se pudo leer productos.json'); return r.json(); })
+    .then(function(data){ pintarCatalogo((data && data.productos) || PRODUCTOS_RESPALDO); })
+    .catch(function(){ pintarCatalogo(PRODUCTOS_RESPALDO); });
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+PANEL DE ADMINISTRACIÓN — cómo activarlo
+==========================================
+
+Qué es
+------
+Ya viene armado un panel en /admin (usuario y contraseña, con formularios)
+para que puedas, sin tocar código:
+
+  - Agregar productos nuevos
+  - Editar precio, talles, color, foto
+  - Marcar un producto "sin stock" (aparece en gris con la etiqueta
+    "Agotado" y el botón de WhatsApp se desactiva)
+  - Poner un producto "en oferta" con un precio rebajado (se muestra el
+    precio viejo tachado y el nuevo, más una etiqueta "Oferta")
+
+Cada cambio que guardás en el panel se sube solo al sitio: en 1–2 minutos
+ya está publicado, sin que vos tengas que volver a subir nada.
+
+Importante: el panel NO funciona simplemente abriendo el archivo en el
+navegador ni con "Netlify Drop" (arrastrar la carpeta). Necesita que el
+sitio esté conectado a un repositorio en GitHub, porque ahí es donde el
+panel guarda cada cambio. Es igual de gratis, pero son más pasos de
+configuración iniciales — se hacen una sola vez.
+
+
+PASO A PASO (una sola vez)
+----------------------------
+
+1) Crear cuenta en GitHub (si no tenés)
+   Andá a https://github.com y creá una cuenta gratis.
+
+2) Subir esta carpeta a un repositorio nuevo
+   - En GitHub, botón "New" → creá un repositorio (puede ser privado).
+   - Adentro del repositorio, "Add file" → "Upload files".
+   - Arrastrá TODO el contenido de esta carpeta (tu-marca-jeans), incluida
+     la carpeta "admin" y la carpeta "content" — no hace falta usar
+     comandos de git, se puede subir todo desde la web de GitHub.
+   - Confirmá el commit.
+
+3) Conectar ese repositorio a Netlify
+   - En https://app.netlify.com → "Add new site" → "Import an existing
+     project" → elegí GitHub y ese repositorio.
+   - Build command: dejalo vacío.
+   - Publish directory: un punto "." (la raíz del repositorio).
+   - Deploy site.
+
+4) Activar Identity (el login del panel)
+   - Adentro del sitio ya creado en Netlify: "Site configuration" →
+     "Identity" → "Enable Identity".
+   - En "Registration preferences", elegí "Invite only" (para que nadie
+     más se pueda registrar solo).
+
+5) Activar Git Gateway (conecta el panel con el repositorio)
+   - Seguís en Identity → "Services" → "Git Gateway" → "Enable Git
+     Gateway".
+
+6) Invitarte a vos mismo como usuario del panel
+   - Identity → "Invite users" → poné tu email.
+   - Te llega un correo para crear tu contraseña.
+
+7) Entrar al panel
+   - Andá a https://TU-SITIO.netlify.app/admin (con el nombre real de tu
+     sitio) e iniciá sesión con el usuario que creaste.
+   - Ahí vas a ver "Catálogo de productos" → "Productos del catálogo",
+     con la lista completa. Podés editar cualquiera, agregar uno nuevo
+     con "Add" o borrarlo con el ícono de tacho.
+   - Al tocar "Publicar", el sitio se actualiza solo.
+
+
+NOTAS
+-----
+- Este mismo panel también sirve para el equipo si en algún momento más
+  de una persona necesita cargar productos: se invita a cada una desde
+  el paso 6, cada una con su propio usuario.
+- Si preferís no configurar esto todavía, el sitio sigue funcionando
+  igual: el catálogo se puede seguir editando a mano en
+  content/productos.json (ver la guía dentro de index.html).
+- Si en algún momento el negocio crece mucho y este panel se queda
+  corto (por ejemplo, necesitás carga masiva, múltiples sucursales, o
+  reportes de stock), ese es el momento de pasar a una solución con
+  base de datos propia — es un salto de complejidad más grande, se
+  puede conversar en el chat cuando llegue el caso.
